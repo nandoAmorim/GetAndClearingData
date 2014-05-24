@@ -21,7 +21,7 @@ data.merger$methods(
          result <- result |grepl(field,names(data),fixed=T)
       }
       result <- result |grepl('activity',names(data),fixed=T)
-      print(result)
+      result <- result |grepl('subject',names(data),fixed=T)
       return(result)
   }
 )
