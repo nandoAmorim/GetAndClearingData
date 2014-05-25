@@ -1,6 +1,6 @@
 
 data.loader <- setRefClass(Class = "data.loader",
-                  fields = list(data = 'data.frame')
+                  fields = list(data   = 'data.frame')
 )
 
 data.loader$methods(

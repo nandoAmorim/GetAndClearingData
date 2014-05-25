@@ -1,5 +1,8 @@
+library(data.table)
 data.merger <- setRefClass(Class = "data.merger",
-                           fields = list(data = 'data.frame')
+                           fields = list(data   = 'data.frame',
+                                         data_output = 'data.table'     
+                                    )
 )
 
 data.merger$methods(
@@ -9,11 +12,15 @@ data.merger$methods(
      data <<- rbind(train_data$data, test_data$data)
      train_data <- 0
      test_data  <- 0
+     output(selections)
+     
   },
   output=function(fields){
      sel <- selection(fields)
      result <- data[sel]
-     return(result)
+     data_output <<- data.table(result)
+     data_output <<- data_output[,lapply(.SD, mean), by=c('activity','subject')]
+     write.csv(data_output,file='output.txt',sep=',',row.names=F)
   },
   selection=function(fields){
       result <- as.vector(rep(F,length(names(data))))
