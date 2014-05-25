@@ -27,5 +27,5 @@ The write.scv function was used to produce the text file for the solution.
 
 ```{r}
 DT <- data.table(df)
-DT[, lapply(.SD, sum), by = c('activity',)]
+DT[, lapply(.SD, sum), by = c('activity','subject')]
 ```
